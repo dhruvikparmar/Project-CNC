@@ -28,7 +28,7 @@ function App() {
           <Route path='/valueablePartner' element={<Cliens/>} />
           <Route path='/contact' element={<ContactForm/>} />
         </Routes>
-        <Footer />
+        <Footer/>
       </BrowserRouter>
     </>
   )
