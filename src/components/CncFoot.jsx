@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 
-export default function footer() {
+export default function CncFoot() {
   const navigate = useNavigate();
 
   const handleNavigate = (to) => {

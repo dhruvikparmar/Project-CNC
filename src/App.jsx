@@ -5,12 +5,13 @@ import AboutUs from './pages/AboutUs'
 import Infrastructure from './pages/Infrastructure'
 import Quality from './pages/Quality'
 import Cliens from './pages/Cliens'
-import Navbar from './components/navbar'
 
 import Home from './pages/Home'
 import Capibility from './pages/Capibility'
-import Footer from './components/footer'
 import ContactForm from './pages/ContactForm'
+import CncNav from './components/CncNav'
+import CncFoot from './components/CncFoot'
+
 
 
 function App() {
@@ -18,7 +19,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
-      <Navbar/>
+      <CncNav/>
         <Routes>  
           <Route path='/' element={<Home/>} />
           <Route path='/AboutUs' element={<AboutUs/>} />
@@ -28,7 +29,7 @@ function App() {
           <Route path='/valueablePartner' element={<Cliens/>} />
           <Route path='/contact' element={<ContactForm/>} />
         </Routes>
-        <Footer/>
+       <CncFoot/>
       </BrowserRouter>
     </>
   )
