@@ -12,24 +12,35 @@ import ContactForm from './pages/ContactForm'
 import CncNav from './components/CncNav'
 import CncFoot from './components/CncFoot'
 
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 
 
 function App() {
+  useEffect(() => {
+    AOS.init({
+      duration: 900,
+      easing: "ease-out-cubic",
+      once: true,
+    });
+  }, []);
 
   return (
     <>
       <BrowserRouter>
-      <CncNav/>
-        <Routes>  
-          <Route path='/' element={<Home/>} />
-          <Route path='/AboutUs' element={<AboutUs/>} />
-          <Route path='/Quality' element={<Quality/>} />
-          <Route path='/Infrastructure' element={<Infrastructure/>} />
-          <Route path='/capibility' element={<Capibility/>} />
-          <Route path='/valueablePartner' element={<Cliens/>} />
-          <Route path='/contact' element={<ContactForm/>} />
+        <CncNav />
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/AboutUs' element={<AboutUs />} />
+          <Route path='/Quality' element={<Quality />} />
+          <Route path='/Infrastructure' element={<Infrastructure />} />
+          <Route path='/capibility' element={<Capibility />} />
+          <Route path='/valueablePartner' element={<Cliens />} />
+          <Route path='/contact' element={<ContactForm />} />
         </Routes>
-       <CncFoot/>
+        <CncFoot />
       </BrowserRouter>
     </>
   )

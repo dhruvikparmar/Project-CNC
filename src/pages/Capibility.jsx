@@ -1,8 +1,54 @@
-
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
+// ================= COUNT-UP COMPONENT =================
+const CountUpValue = ({ end, suffix = "", duration = 2000 }) => {
+  const [count, setCount] = useState(0);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    if (!ref.current) return;
+
+    const element = ref.current;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (entry.isIntersecting) {
+          const startTime = performance.now();
+
+          const animate = (time) => {
+            const progress = Math.min((time - startTime) / duration, 1);
+            const value = Math.floor(progress * end);
+            setCount(value);
+
+            if (progress < 1) {
+              requestAnimationFrame(animate);
+            }
+          };
+
+          requestAnimationFrame(animate);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.4 }
+    );
+
+    observer.observe(element);
+
+    return () => observer.disconnect();
+  }, [end, duration]);
+
+  return (
+    <span ref={ref}>
+      {count}
+      {suffix}
+    </span>
+  );
+};
+
+// ================= MAIN COMPONENT =================
 export default function Capibility() {
   useEffect(() => {
     AOS.init({ duration: 900, easing: "ease-out", once: true });
@@ -10,23 +56,20 @@ export default function Capibility() {
 
   return (
     <div className="bg-[#f5f3ee] min-h-screen">
-
       {/* ================= HERO SECTION ================= */}
       <section
         className="relative pt-20 w-full 
         min-h-[40vh] sm:min-h-[50vh] md:min-h-[60vh] lg:h-[350px]
         flex items-center justify-center overflow-hidden"
-        
       >
         <img
           src="/capability.jpg"
           alt="CNC Capability"
           className="absolute inset-0 w-full h-full object-cover object-center"
-          
           data-aos="fade-zoom-in"
-         data-aos-offset="0"
-        data-aos-easing="ease-in-out"
-        data-aos-duration="1000"
+          data-aos-offset="0"
+          data-aos-easing="ease-in-out"
+          data-aos-duration="1000"
         />
 
         {/* Dark Overlay */}
@@ -41,20 +84,11 @@ export default function Capibility() {
           <h1
             data-aos="zoom-in"
             data-aos-delay="300"
-            className="block justify-center items-center mb-14 text-2xl sm:text-3xl md:text-4xl lg:text-5xl
+            className="block justify-center items-center mb-14 text-2xl sm:text-3xl md:text-4xl lg:text-6xl
                        font-extrabold text-white"
           >
             Our <span className="text-sky-400">Capabilities</span>
           </h1>
-
-          {/* <p
-            data-aos="fade-up"
-            data-aos-delay="450"
-            className="mt-2 text-sm sm:text-base md:text-lg text-[#e2e8f0] max-w-2xl mx-auto"
-          >
-            Precision CNC machining for small parts, heavy components,
-            and long-term production with consistency.
-          </p> */}
         </div>
       </section>
 
@@ -69,40 +103,62 @@ export default function Capibility() {
           </h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            {[
-              {
-                t: "Diameter Range",
-                v: "10mm – 450mm",
-                d: "Handling from small precision parts to large rings.",
-              },
-              {
-                t: "Monthly Output",
-                v: "27 Tonnes",
-                d: "Stable output for OEM and regular supply.",
-              },
-              {
-                t: "Maximum Job Weight",
-                v: "120 kg",
-                d: "Supports medium to heavy components safely.",
-              },
-            ].map((item, idx) => (
-              <div
-                key={idx}
-                data-aos="zoom-in"
-                className="bg-[#091b32] border border-[#1e3358]
-                           rounded-xl p-6 text-center shadow-lg
-                           transition-all duration-300
-                           hover:-translate-y-1 hover:shadow-sky-400/30"
-              >
-                <p className="text-xs uppercase tracking-wide text-sky-300 mb-2">
-                  {item.t}
-                </p>
-                <h3 className="text-2xl sm:text-3xl font-bold text-[#dbeafe] mb-1">
-                  {item.v}
-                </h3>
-                <p className="text-[#9fb3c8] text-sm">{item.d}</p>
-              </div>
-            ))}
+            {/* Diameter Range */}
+            <div
+              data-aos="zoom-in"
+              className="bg-[#091b32] border border-[#1e3358]
+                         rounded-xl p-6 text-center shadow-lg
+                         transition-all duration-300
+                         hover:-translate-y-1 hover:shadow-sky-400/30"
+            >
+              <p className="text-xs uppercase tracking-wide text-sky-300 mb-2">
+                Diameter Range
+              </p>
+              <h3 className="text-2xl sm:text-3xl font-bold text-[#dbeafe] mb-1">
+                <CountUpValue end={10} />mm – <CountUpValue end={450} />mm
+              </h3>
+              <p className="text-[#9fb3c8] text-sm">
+                Handling from small precision parts to large rings.
+              </p>
+            </div>
+
+            {/* Monthly Output */}
+            <div
+              data-aos="zoom-in"
+              className="bg-[#091b32] border border-[#1e3358]
+                         rounded-xl p-6 text-center shadow-lg
+                         transition-all duration-300
+                         hover:-translate-y-1 hover:shadow-sky-400/30"
+            >
+              <p className="text-xs uppercase tracking-wide text-sky-300 mb-2">
+                Monthly Output
+              </p>
+              <h3 className="text-2xl sm:text-3xl font-bold text-[#dbeafe] mb-1">
+                <CountUpValue end={27} /> Tonnes
+              </h3>
+              <p className="text-[#9fb3c8] text-sm">
+                Stable output for OEM and regular supply.
+              </p>
+            </div>
+
+            {/* Maximum Job Weight */}
+            <div
+              data-aos="zoom-in"
+              className="bg-[#091b32] border border-[#1e3358]
+                         rounded-xl p-6 text-center shadow-lg
+                         transition-all duration-300
+                         hover:-translate-y-1 hover:shadow-sky-400/30"
+            >
+              <p className="text-xs uppercase tracking-wide text-sky-300 mb-2">
+                Maximum Job Weight
+              </p>
+              <h3 className="text-2xl sm:text-3xl font-bold text-[#dbeafe] mb-1">
+                <CountUpValue end={120} /> kg
+              </h3>
+              <p className="text-[#9fb3c8] text-sm">
+                Supports medium to heavy components safely.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -110,7 +166,6 @@ export default function Capibility() {
       {/* ================= DETAILS SECTION ================= */}
       <section className="py-10 sm:py-14 px-4">
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
-
           {/* LEFT BOXES */}
           <div className="space-y-7">
             {[
@@ -155,12 +210,30 @@ export default function Capibility() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {[
-                { t: "Small Precision Parts", d: "Ideal for bushes, sleeves & small custom CNC components." },
-                { t: "Large Rings & Housings", d: "Perfect for bearing rings & heavy automotive parts." },
-                { t: "Batch Production", d: "Supports repetitive machining with consistency." },
-                { t: "Prototype to Mass", d: "From samples to large production volumes." },
-                { t: "Repeat Accuracy", d: "Dimensional stability across batch production." },
-                { t: "Reliable Delivery", d: "Process planning ensures committed dispatch timelines." },
+                {
+                  t: "Small Precision Parts",
+                  d: "Ideal for bushes, sleeves & small custom CNC components.",
+                },
+                {
+                  t: "Large Rings & Housings",
+                  d: "Perfect for bearing rings & heavy automotive parts.",
+                },
+                {
+                  t: "Batch Production",
+                  d: "Supports repetitive machining with consistency.",
+                },
+                {
+                  t: "Prototype to Mass",
+                  d: "From samples to large production volumes.",
+                },
+                {
+                  t: "Repeat Accuracy",
+                  d: "Dimensional stability across batch production.",
+                },
+                {
+                  t: "Reliable Delivery",
+                  d: "Process planning ensures committed dispatch timelines.",
+                },
               ].map((item, idx) => (
                 <div
                   key={idx}
@@ -206,7 +279,6 @@ export default function Capibility() {
           </button>
         </div>
       </section>
-
     </div>
   );
 }
