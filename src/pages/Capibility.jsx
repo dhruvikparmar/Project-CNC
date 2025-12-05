@@ -1,57 +1,37 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-// ================= COUNT-UP COMPONENT =================
-const CountUpValue = ({ end, suffix = "", duration = 2000 }) => {
-  const [count, setCount] = useState(0);
-  const ref = useRef(null);
-
+export default function Capability() {
   useEffect(() => {
-    if (!ref.current) return;
-
-    const element = ref.current;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const [entry] = entries;
-        if (entry.isIntersecting) {
-          const startTime = performance.now();
-
-          const animate = (time) => {
-            const progress = Math.min((time - startTime) / duration, 1);
-            const value = Math.floor(progress * end);
-            setCount(value);
-
-            if (progress < 1) {
-              requestAnimationFrame(animate);
-            }
-          };
-
-          requestAnimationFrame(animate);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.4 }
-    );
-
-    observer.observe(element);
-
-    return () => observer.disconnect();
-  }, [end, duration]);
-
-  return (
-    <span ref={ref}>
-      {count}
-      {suffix}
-    </span>
-  );
-};
-
-// ================= MAIN COMPONENT =================
-export default function Capibility() {
-  useEffect(() => {
+    // Initialize AOS
     AOS.init({ duration: 900, easing: "ease-out", once: true });
+
+    // Number animation function
+    const animateValue = (id, start, end, duration, suffix = "") => {
+      const el = document.getElementById(id);
+      if (!el) return;
+
+      let startTime = null;
+
+      const step = (timestamp) => {
+        if (!startTime) startTime = timestamp;
+        const progress = Math.min((timestamp - startTime) / duration, 1);
+        const value = Math.floor(progress * (end - start) + start);
+        el.innerText = value + suffix;
+        if (progress < 1) {
+          window.requestAnimationFrame(step);
+        }
+      };
+
+      window.requestAnimationFrame(step);
+    };
+
+    // 🔥 Run animations when page loads
+    animateValue("rangeLeft", 0, 10, 2000, "mm");
+    animateValue("rangeRight", 0, 450, 2000, "mm");
+    animateValue("outputCount", 0, 27, 1500, " Tonnes");
+    animateValue("weightCount", 0, 120, 2000, " kg");
   }, []);
 
   return (
@@ -67,8 +47,6 @@ export default function Capibility() {
           alt="CNC Capability"
           className="absolute inset-0 w-full h-full object-cover object-center"
           data-aos="fade-zoom-in"
-          data-aos-offset="0"
-          data-aos-easing="ease-in-out"
           data-aos-duration="1000"
         />
 
@@ -84,7 +62,8 @@ export default function Capibility() {
           <h1
             data-aos="zoom-in"
             data-aos-delay="300"
-            className="block justify-center items-center mb-14 text-2xl sm:text-3xl md:text-4xl lg:text-6xl
+            className="block justify-center items-center mb-14 
+                       text-2xl sm:text-3xl md:text-4xl lg:text-5xl
                        font-extrabold text-white"
           >
             Our <span className="text-sky-400">Capabilities</span>
@@ -115,7 +94,8 @@ export default function Capibility() {
                 Diameter Range
               </p>
               <h3 className="text-2xl sm:text-3xl font-bold text-[#dbeafe] mb-1">
-                <CountUpValue end={10} />mm – <CountUpValue end={450} />mm
+                <span id="rangeLeft">0mm</span> –{" "}
+                <span id="rangeRight">0mm</span>
               </h3>
               <p className="text-[#9fb3c8] text-sm">
                 Handling from small precision parts to large rings.
@@ -133,8 +113,11 @@ export default function Capibility() {
               <p className="text-xs uppercase tracking-wide text-sky-300 mb-2">
                 Monthly Output
               </p>
-              <h3 className="text-2xl sm:text-3xl font-bold text-[#dbeafe] mb-1">
-                <CountUpValue end={27} /> Tonnes
+              <h3
+                id="outputCount"
+                className="text-2xl sm:text-3xl font-bold text-[#dbeafe] mb-1"
+              >
+                0 Tonnes
               </h3>
               <p className="text-[#9fb3c8] text-sm">
                 Stable output for OEM and regular supply.
@@ -152,8 +135,11 @@ export default function Capibility() {
               <p className="text-xs uppercase tracking-wide text-sky-300 mb-2">
                 Maximum Job Weight
               </p>
-              <h3 className="text-2xl sm:text-3xl font-bold text-[#dbeafe] mb-1">
-                <CountUpValue end={120} /> kg
+              <h3
+                id="weightCount"
+                className="text-2xl sm:text-3xl font-bold text-[#dbeafe] mb-1"
+              >
+                0 kg
               </h3>
               <p className="text-[#9fb3c8] text-sm">
                 Supports medium to heavy components safely.
@@ -237,7 +223,9 @@ export default function Capibility() {
               ].map((item, idx) => (
                 <div
                   key={idx}
-                  className="bg-[#091b32] rounded-lg p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-sky-300/20"
+                  className="bg-[#091b32] rounded-lg p-4
+                             transition-all duration-300
+                             hover:-translate-y-1 hover:shadow-sky-300/20"
                 >
                   <p className="text-sky-300 font-semibold mb-1">
                     {item.t}

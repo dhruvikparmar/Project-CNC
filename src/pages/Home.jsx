@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import AOS from "aos";
 import "aos/dist/aos.css";
+
 
 /* ================= SLIDER IMAGES (BEARING / INDUSTRIAL) ================= */
 const slides = [
@@ -10,16 +12,16 @@ const slides = [
   "slider5.webp",
 ];
 
+export default function Home() {
+
 /* ================= MILESTONE COMPONENT ================= */
 const Milestone = ({ year, title, points, align = "left", highlight }) => (
   <div
     data-aos={align === "left" ? "fade-right" : "fade-left"}
     className={`relative md:w-1/2 px-6
-      ${
-        align === "left"
-          ? "md:pr-12 md:text-right"
-          : "md:pl-12 md:text-left md:ml-auto"
-      }`}
+      ${align === "left"
+        ? "md:pr-12 md:text-right"
+        : "md:pl-12 md:text-left md:ml-auto"}`}
   >
     {/* DOT */}
     <div
@@ -30,10 +32,13 @@ const Milestone = ({ year, title, points, align = "left", highlight }) => (
     />
 
     {/* CARD */}
-    <div className="bg-[#0c2546] border border-[#1e3358] rounded-xl p-5 shadow-lg">
+    <div className="bg-[#0c2546] border border-[#1e3358]
+                    rounded-xl p-5 shadow-lg">
       <span className="text-sky-400 font-semibold text-sm">{year}</span>
 
-      <h3 className="text-lg font-bold text-[#dbeafe] mb-2">{title}</h3>
+      <h3 className="text-lg font-bold text-[#dbeafe] mb-2">
+        {title}
+      </h3>
 
       <ul className="text-[#9fb3c8] text-sm space-y-1">
         {points.map((item, idx) => (
@@ -43,11 +48,14 @@ const Milestone = ({ year, title, points, align = "left", highlight }) => (
     </div>
   </div>
 );
-
-export default function Home() {
   const [current, setCurrent] = useState(0);
 
-  const nextSlide = () => setCurrent((prev) => (prev + 1) % slides.length);
+  useEffect(() => {
+    AOS.init({ duration: 900, once: true, easing: "ease-out-cubic" });
+  }, []);
+
+  const nextSlide = () =>
+    setCurrent((prev) => (prev + 1) % slides.length);
 
   const prevSlide = () =>
     setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
@@ -69,11 +77,9 @@ export default function Home() {
               alt="Bearing Industry"
               className={`absolute inset-0 w-full h-full object-cover
                           transition-all duration-1000 ease-in-out
-                          ${
-                            index === current
-                              ? "opacity-100 scale-110"
-                              : "opacity-0 scale-100"
-                          }`}
+                          ${index === current
+                  ? "opacity-100 scale-110"
+                  : "opacity-0 scale-100"}`}
             />
           ))}
 
@@ -117,32 +123,34 @@ export default function Home() {
             data-aos="fade-up"
           >
             <h1
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl
+              className="text-2xl sm:text-3xl max-sm:text-3xl md:text-4xl lg:text-5xl
                          font-bold text-white
                          transition-all duration-700
                          hover:scale-105"
             >
-              Precision Bearing{" "}
-              <span className="text-sky-400">Manufacturing</span>
+              Precision Bearing <span className="text-sky-400">Manufacturing</span>
             </h1>
           </div>
         </div>
       </section>
 
-      {/* ================= HOW WE WORK ================= */}
+  {/* ================= HOW WE WORK ================= */}
       <section className="bg-[#f5f3ee] py-16 px-4">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+
           {/* TEXT CONTENT */}
           <div data-aos="fade-right">
             <h4 className="text-sm font-semibold tracking-wider text-[#091b32] mb-2">
               ABOUT US
             </h4>
 
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0c2546] mb-5">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl
+                     font-bold text-[#0c2546] mb-5">
               How We Work
             </h2>
 
-            <p className="text-gray-700 text-sm sm:text-base lg:text-lg font-medium leading-relaxed">
+            <p className="text-gray-700 text-sm sm:text-base lg:text-lg
+                    font-medium leading-relaxed">
               We follow a structured and quality-driven manufacturing process.
               From raw material selection to final inspection, every step is
               carefully planned and monitored. Our experienced team and modern
@@ -152,7 +160,10 @@ export default function Home() {
           </div>
 
           {/* IMAGE */}
-          <div data-aos="fade-left" className="flex justify-center md:justify-end">
+          <div
+            data-aos="fade-left"
+            className="flex justify-center md:justify-end"
+          >
             <div
               className="w-full
                max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg
@@ -169,12 +180,14 @@ export default function Home() {
               />
             </div>
           </div>
+
         </div>
       </section>
 
-      {/* ================= OUR CAPABILITIES ================= */}
+     {/* ================= OUR CAPABILITIES ================= */}
       <section className="bg-[#f5f3ee] py-16 px-4">
         <div className="max-w-7xl mx-auto">
+
           <h2
             className="text-center text-2xl sm:text-3xl font-bold
                  text-[#0c2546] mb-10"
@@ -184,27 +197,28 @@ export default function Home() {
           </h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
             {[
               {
                 title: "CNC Turning",
                 img: "cnc-turning.jpg",
-                desc: "High-precision turning for shafts and bearing rings.",
+                desc: "High-precision turning for shafts and bearing rings."
               },
               {
                 title: "CNC Milling",
                 img: "cnc-milling.webp",
-                desc: "Accurate milling for complex geometries.",
+                desc: "Accurate milling for complex geometries."
               },
               {
                 title: "Bearing Components",
                 img: "bearing.jpg",
-                desc: "Manufacturing of inner and outer bearing rings.",
+                desc: "Manufacturing of inner and outer bearing rings."
               },
               {
                 title: "Precision Grinding",
                 img: "precisions.webp",
-                desc: "Micron-level finishing and tight tolerances.",
-              },
+                desc: "Micron-level finishing and tight tolerances."
+              }
             ].map((item, i) => (
               <div
                 key={i}
@@ -229,27 +243,29 @@ export default function Home() {
                   <h3 className="text-[#dbeafe] font-semibold mb-1">
                     {item.title}
                   </h3>
-                  <p className="text-[#9fb3c8] text-sm">{item.desc}</p>
+                  <p className="text-[#9fb3c8] text-sm">
+                    {item.desc}
+                  </p>
                 </div>
               </div>
             ))}
+
           </div>
         </div>
       </section>
-
-      {/* ================= OUR MILESTONES ================= */}
+{/* ✅ ================= OUR MILESTONES (FIXED POSITION) ================= */}
       <section className="bg-[#f5f3ee] py-16 px-4">
         <h2
-          className="text-center text-2xl sm:text-3xl font-bold
+            className="text-center text-2xl sm:text-3xl font-bold
                  text-[#0c2546] mb-10"
-          data-aos="fade-up"
-        >
-          Our Milestones
-        </h2>
+            data-aos="fade-up"
+          >
+            Our Milestones
+          </h2>
 
         <div className="relative max-w-7xl mx-auto">
-          {/* Center Line */}
-          <div className="hidden md:block absolute left-1/2 top-0 h-full w-0.5 bg-sky-400/30 -translate-x-1/2" />
+          <div className="hidden md:block absolute left-1/2 top-0 h-full
+                          w-0.5 bg-sky-400/30 -translate-x-1/2" />
 
           <div className="space-y-12">
             <Milestone
@@ -299,9 +315,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ================= OUR PRODUCTS / EXPERTISE ================= */}
+   {/* ================= OUR PRODUCTS ================= */}
+
       <section className="bg-[#f5f3ee] py-16 px-4">
         <div className="max-w-7xl mx-auto">
+
           <h2
             className="text-center text-2xl sm:text-3xl font-bold
                  text-[#0c2546] mb-10"
@@ -311,27 +329,28 @@ export default function Home() {
           </h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
             {[
               {
                 title: "Gear",
                 img: "product1.JPG",
-                desc: "Precision-machined inner and outer bearing rings.",
+                desc: "Precision-machined inner and outer bearing rings."
               },
               {
                 title: "Hydrolic piston",
                 img: "expertise.jpg",
-                desc: "High-strength CNC parts for automotive applications.",
+                desc: "High-strength CNC parts for automotive applications."
               },
               {
                 title: "Wheel",
                 img: "product5.JPG",
-                desc: "Custom CNC machined components with tight tolerances.",
+                desc: "Custom CNC machined components with tight tolerances."
               },
               {
                 title: "Automobile Parts",
                 img: "product4.JPG",
-                desc: "Final polishing and grinding for superior surface finish.",
-              },
+                desc: "Final polishing and grinding for superior surface finish."
+              }
             ].map((item, i) => (
               <div
                 key={i}
@@ -356,13 +375,18 @@ export default function Home() {
                   <h3 className="text-[#dbeafe] font-semibold mb-1">
                     {item.title}
                   </h3>
-                  <p className="text-[#9fb3c8] text-sm">{item.desc}</p>
+                  <p className="text-[#9fb3c8] text-sm">
+                    {item.desc}
+                  </p>
                 </div>
               </div>
             ))}
+
           </div>
         </div>
       </section>
     </>
   );
 }
+
+  

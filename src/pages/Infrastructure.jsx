@@ -132,7 +132,7 @@ export default function Infrastructure() {
                                 data-aos="fade-right"
                             >
                                 <div className="bg-white min-w-[55px] min-h-[55px] flex items-center justify-center 
-                        text-2xl font-bold rounded-xl shadow-md">
+                        text-2xl text-blue-700 font-bold rounded-xl shadow-md">
                                     ✔
                                 </div>
 
