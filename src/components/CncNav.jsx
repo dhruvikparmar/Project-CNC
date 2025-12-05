@@ -182,7 +182,7 @@ export default function CncNav() {
               <img
                 src="/logo5.png"
                 alt="Aeroprecise"
-                className="h-26 sm:h-20 md:h-25 lg:h-32 lg:mt-2 w-auto max-w-[140px] object-contain"
+                className="h-32 sm:h-20 md:h-25 lg:h-32 lg:mt-2 w-auto max-w-[140px] object-contain"
               />
             </div>
 
