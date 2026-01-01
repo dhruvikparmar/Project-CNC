@@ -1,160 +1,180 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function CncNav() {
   const [scrolled, setScrolled] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
+
+  /* ---------------- Scroll Effect ---------------- */
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 10); // Enable when scroll starts
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const navigateAndScrollTop = (to) => {
-    navigate(to);
-    window.scrollTo({ top: 0, behavior: "instant" });
+  const go = (path) => {
+    navigate(path);
+    window.scrollTo({ top: 0, behavior: "auto" });
+  };
+
+  const NavItem = ({ label, to, go, activePath }) => {
+    const isActive = activePath === to;
+
+    return (
+      <button
+        onClick={() => go(to)}
+        className={`
+        cursor-pointer
+        relative text-xs md:text-sm lg:text-lg font-medium
+        transition-all duration-300
+        ${isActive ? "text-sky-300" : "text-white hover:text-sky-300"}
+        after:absolute after:left-0 after:-bottom-1
+        after:h-[2px] after:bg-sky-300
+        after:transition-all after:duration-300
+        ${isActive ? "" : "after:w-0 hover:after:w-full"}
+      `}
+      >
+        {label}
+      </button>
+    );
   };
 
   return (
-    <nav
-      className={`
-        fixed inset-x-0 top-0 z-[9999]
-        transition-all duration-500 ease-in-out
-        ${scrolled ? "bg-[#091b32]/95 backdrop-blur-md shadow-md " : "bg-transparent"}
-      `}
-    >
-      <div className="w-full overflow-hidden">
+    <>
+      {/* ================= NAVBAR ================= */}
+      <nav
+        className={`fixed top-0 inset-x-0 z-[9999]
+        transition-all duration-300
+        ${scrolled ? "bg-[#091b32]/95 shadow-md" : "bg-[#091b32]"}`}
+      >
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center h-16">
 
-            {/* LOGO */}
+            {/* -------- LOGO -------- */}
             <div
-              onClick={() => navigateAndScrollTop("/")}
+              onClick={() => go("/")}
               className="flex items-center cursor-pointer shrink-0"
             >
               <img
-                src="/logo5.png"
-                alt="Zenith CNC"
-                className="
-                  h-24 sm:h-28 md:h-30 lg:h-36 lg:mt-2
-                  w-auto max-w-[220px]
-                  object-contain cursor-pointer
-                  transition-transform duration-300
-                  hover:scale-105
-                "
+                src="/Logo3.png"
+                alt="Shree Industries"
+                className="h-9 sm:h-16 md:h-13 lg:h-12 w-auto max-w-[120px] object-contain"
               />
             </div>
-
-            {/* DESKTOP MENU */}
-            <div className="hidden md:flex flex-1 justify-center md:space-x-4 lg:space-x-8">
-              <NavItem label="Home" to="/" onClick={navigateAndScrollTop} />
-              <NavItem label="About Us" to="/AboutUs" onClick={navigateAndScrollTop} />
-              <NavItem label="Quality" to="/Quality" onClick={navigateAndScrollTop} />
-              <NavItem label="Infrastructure" to="/Infrastructure" onClick={navigateAndScrollTop} />
-              <NavItem label="Capability" to="/capibility" onClick={navigateAndScrollTop} />
-              <NavItem label="Valuable Partner" to="/valueablepartner" onClick={navigateAndScrollTop} />
+            {/* -------- DESKTOP MENU -------- */}
+            <div className="hidden md:flex flex-1 justify-center gap-3 lg:gap-10">
+              <div className="cursor-pointer"><NavItem label="Home" to="/" go={go} activePath={location.pathname}/></div>
+              <NavItem label="About Us" to="/AboutUs" go={go} activePath={location.pathname} />
+              <NavItem label="Infrastructure" to="/Infrastructure" go={go} activePath={location.pathname}/>
+              <NavItem label="Quality" to="/Quality" go={go} activePath={location.pathname}/>
+              <NavItem label="Capability" to="/capibility" go={go} activePath={location.pathname}/>
+              <NavItem label="Industries We Serve" to="/valueablepartner" go={go} activePath={location.pathname}/>
+              <NavItem label="Gallery" to="/Gallery" go={go} activePath={location.pathname}/>
             </div>
 
-            {/* CONTACT BUTTON */}
+            {/* -------- DESKTOP CONTACT -------- */}
             <div className="hidden md:block shrink-0">
-              <ContactButton onClick={() => navigateAndScrollTop("/contact")} />
+              <button
+                onClick={() => go("/contact")}
+                className="px-3 py-1.5 cursor-pointer text-xs md:text-sm font-semibold text-white bg-[#3a92d1]
+                           rounded-md hover:bg-sky-700 transition"
+              >
+                Contact
+              </button>
             </div>
 
-            {/* MOBILE MENU TOGGLE */}
-            <MobileMenu />
+            {/* -------- MOBILE MENU -------- */}
+            <MobileMenu go={go} />
           </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+
+      {/* Spacer */}
+      <div className="h-16"></div>
+    </>
   );
 }
 
-/******** NAV ITEM ********/
-const NavItem = ({ label, to, onClick }) => (
+/* ================= SUB COMPONENTS ================= */
+
+/* ✅ DESKTOP MENU ITEM WITH UNDERLINE */
+const NavItem = ({ label, to, go }) => (
   <button
-    onClick={() => onClick(to)}
+    onClick={() => go(to)}
     className="
-      relative cursor-pointer text-blue-50 font-medium
-      text-xs md:text-sm lg:text-base transition-colors duration-300 hover:text-white
-      after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-sky-300
-      after:transition-all after:duration-300 hover:after:w-full
+      relative text-white text-xs md:text-sm lg:text-lg font-medium
+      transition-colors duration-300
+      hover:text-sky-300
+      after:absolute after:left-0 after:-bottom-1
+      after:h-[2px] after:w-0 after:bg-sky-300
+      after:transition-all after:duration-300
+      hover:after:w-full
     "
   >
     {label}
   </button>
 );
 
-/******** CONTACT BUTTON ********/
-const ContactButton = ({ full, onClick }) => (
-  <button
-    onClick={onClick}
-    className={`inline-flex items-center justify-center ${full ? "w-full" : ""}
-      cursor-pointer shrink-0
-      px-4 lg:px-6 py-1.5 lg:py-2
-      text-xs md:text-sm lg:text-base font-semibold text-white
-      bg-[#1158a3] rounded-md
-      transition-all duration-300 hover:bg-sky-700 hover:scale-105 active:scale-95
-      shadow hover:shadow-sky-200/40`}
-  >
-    Contact
-  </button>
-);
-
-/******** MOBILE MENU ********/
-const MobileMenu = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const navigate = useNavigate();
-
-  const navigateAndClose = (to) => {
-    navigate(to);
-    window.scrollTo({ top: 0, behavior: "instant" });
-    setIsOpen(false);
-  };
+/* -------- MOBILE MENU -------- */
+const MobileMenu = ({ go }) => {
+  const [open, setOpen] = useState(false);
 
   return (
     <>
-      <div className="md:hidden ml-auto shrink-0">
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="text-blue-50 text-2xl leading-none cursor-pointer"
-        >
-          {isOpen ? "✕" : "☰"}
-        </button>
-      </div>
+      {/* Hamburger Icon */}
+      <button
+        onClick={() => setOpen(!open)}
+        className="md:hidden ml-auto text-white text-2xl">
+        {open ? "✕" : "☰"}
+      </button>
 
+      {/* Mobile Dropdown */}
       <div
-        className={`md:hidden absolute left-0 right-0 top-16
-          bg-[#091b32]/90 backdrop-blur-lg transition-all duration-300
-          ${isOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"}
-        `}
+        className={`lg:hidden absolute left-0 right-0 top-16 bg-[#091b32]
+        transition-all duration-200
+        ${open ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-3 pointer-events-none"}`}
       >
-        <div className="px-6 py-4 space-y-4 text-center">
-          <MobileNavItem label="Home" to="/" close={navigateAndClose} />
-          <MobileNavItem label="About Us" to="/AboutUs" close={navigateAndClose} />
-          <MobileNavItem label="Quality" to="/Quality" close={navigateAndClose} />
-          <MobileNavItem label="Infrastructure" to="/Infrastructure" close={navigateAndClose} />
-          <MobileNavItem label="Capability" to="/capibility" close={navigateAndClose} />
-          <MobileNavItem label="Valuable Partner" to="/valueablepartner" close={navigateAndClose} />
-          <div className="pt-4">
-            <ContactButton full onClick={() => navigateAndClose("/contact")} />
-          </div>
+        <div className="flex flex-col px-6 py-4 gap-4 text-center">
+          <MobileItem label="Home" to="/" go={go} close={() => setOpen(false)} />
+          <MobileItem label="About Us" to="/AboutUs" go={go} close={() => setOpen(false)} />
+          <MobileItem label="Infrastructure" to="/Infrastructure" go={go} close={() => setOpen(false)} />
+          <MobileItem label="Quality" to="/Quality" go={go} close={() => setOpen(false)} />
+          <MobileItem label="Capability" to="/capibility" go={go} close={() => setOpen(false)} />
+          <MobileItem label="Industries We Serve" to="/valueablepartner" go={go} close={() => setOpen(false)} />
+          <MobileItem label="Gallery" to="/Gallery" go={go} close={() => setOpen(false)} />
+
+          <button
+            onClick={() => {
+              setOpen(false);
+              go("/contact");
+            }}
+            className="w-full bg-sky-400 text-white py-2 rounded-md hover:bg-sky-700 transition"
+          >
+            Contact
+          </button>
         </div>
       </div>
     </>
   );
 };
 
-const MobileNavItem = ({ label, to, close }) => (
+/* ✅ MOBILE MENU ITEM WITH UNDERLINE */
+const MobileItem = ({ label, to, go, close }) => (
   <button
-    onClick={() => close(to)}
-    className="block w-full cursor-pointer text-blue-50 font-medium text-base
-      transition-colors duration-300 hover:text-sky-300"
+    onClick={() => {
+      close();
+      go(to);
+    }}
+    className="
+      relative self-center text-white text-base
+      hover:text-sky-300 transition
+      after:block after:h-[2px] after:w-0 after:mx-auto
+      after:bg-sky-300 after:transition-all after:duration-300
+      hover:after:w-1/2
+    "
   >
     {label}
   </button>
 );
-
-

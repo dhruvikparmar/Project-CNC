@@ -1,14 +1,51 @@
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
+import {
+    Car, Sliders, Cog, Droplet, Gauge, Bolt
+} from "lucide-react";
+
 
 export default function Clients() {
     useEffect(() => {
         AOS.init({ duration: 900, easing: "ease-out", once: true });
     }, []);
+    const industries = [
+        {
+            title: "Automotive Industry",
+            image: "Automotive.webp",
+            icon: <Car size={40} />, // 🚗 Automotive (perfect match)
+        },
+        {
+            title: "Valve & Flow Control Manufacturers",
+            image: "Valve.webp",
+            icon: <Sliders size={40} />, // 🎛️ Flow / Control systems
+        },
+        {
+            title: "Machine Tool Manufacturers",
+            image: "Manufacturers.webp",
+            icon: <Cog size={40} />, // ⚙️ Machines / Tools
+        },
+        {
+            title: "Hydraulic Equipment Manufacturers",
+            image: "Hydroulic.jpg",
+            icon: <Droplet size={40} />, // 💧 Hydraulics / Fluid power
+        },
+        {
+            title: "Pump Manufacturers",
+            image: "Pump.webp",
+            icon: <Gauge size={40} />, // 📈 Pressure / Flow / Pumps
+        },
+        {
+            title: "Fasteners & Precision Component Manufacturers",
+            image: "Fasteners.jpg",
+            icon: <Bolt size={40} />, // 🔩 Fasteners / Precision parts
+        },
+    ];
+
 
     return (
-        <div className="bg-[#f5f3ee] text-[#1a1a1a] overflow-x-hidden">
+        <div id="hero" className="bg-[#f5f3ee] text-[#1a1a1a] overflow-x-hidden">
 
             {/* HERO SECTION */}
             <div
@@ -26,129 +63,135 @@ export default function Clients() {
 
                 <h1
                     data-aos="zoom-in"
-                    className="relative text-3xl sm:text-5xl md:text-6xl lg:text-7xl
+                    className="relative text-2xl sm:text-3xl md:text-4xl lg:text-5xl
           font-extrabold tracking-wide text-white drop-shadow-lg text-center px-4"
                 >
-                    Our Valuable <span className="text-blue-400">Partners</span>
+                    Industries We <span className="text-blue-400">Serve</span>
                 </h1>
             </div>
-
-
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-
+            <div className="max-w-7xl  mx-auto px-4 sm:px-6 lg:px-8">
                 {/* SECTION 1 — INTRO */}
-                <section className="py-15" data-aos="fade-up">
+                <section className="mt-6 md:mt-5" data-aos="fade-up">
 
                     {/* Heading */}
-                    <h2 className="text-center text-2xl md:text-[40px] font-bold text-[#0c2546] mb-8">
+                    <h2 className="text-center text-xl md:text-[40px] font-bold text-[#0c2546] mb-4 md:mb-8">
                         Trusted by Leading Industries
                     </h2>
 
                     {/* Paragraph Box */}
-                    <p className="max-w-4xl mx-auto text-base md:text-xl text-white 
+                    <p className="max-w-8xl mx-auto text-lg md:text-xl text-white 
                 bg-[#0c2546] p-6 md:p-8 rounded-2xl leading-relaxed">
 
-                        AeroPrecise is proud to collaborate with leading industrial, engineering,
-                        and manufacturing organizations across diverse sectors. Our commitment to
-                        precision, reliability, and consistency has earned us long-term partnerships
-                        built on mutual trust and shared growth.
-                        <br /><br />
-                        With every project, we ensure transparent communication, disciplined
-                        workflow execution, and strict quality adherence — enabling us to deliver
-                        high-performance components that meet global standards. Our clients value
-                        our technical expertise, modern infrastructure, and customer-centric
-                        approach, making AeroPrecise a preferred machining and tooling partner
-                        for companies worldwide.
-
+                        <div className="flex"><p className="text-xl md:text-3xl">•</p><p className="ml-3 md:mt-1">Shree industries is proud to collaborate with leading industrial, engineering,
+                            and manufacturing organizations across diverse sectors.</p></div>
+                        <br /><div className="flex"><p className="text-xl md:text-3xl">•</p><p className="ml-3  md:mt-1">Our commitment to precision, reliability, and consistency has earned us long-term partnerships
+                            built on mutual trust and shared growth.</p></div>
+                        <br />
+                        <div className="flex"><p className="text-xl md:text-3xl">•</p><p className="ml-3 md:mt-1">With every project, we ensure transparent communication, disciplined
+                            workflow execution, and strict quality adherence — enabling us to deliver
+                            high-performance components that meet global standards.</p></div>
                     </p>
 
                 </section>
-
-
-
                 {/* SECTION 2 — CLIENT LOGOS GRID */}
-                <section className="py-10">
-                    <h2 className="text-center text-2xl md:text-[40px] font-bold text-[#0c2546] mb-10">
-                        Our Clients
-                    </h2>
+                <section className="w-full py-4 md:pb-6 mt-4 md:mt-8 bg-white shadow-2xl rounded-2xl">
+                    <div className="max-w-7xl mx-auto px-4">
+                        {/* Heading */}
+                        <div className="text-center mb-4 md:mb-7">
+                            <h2 className="text-xl md:text-3xl sm:text-4xl font-bold text-[#091b32]">
+                                Industries We Serve
+                            </h2>
+                            <p className="mt-3 text-gray-600 max-w-2xl mx-auto">
+                                Delivering precision-engineered solutions across diverse industries
+                            </p>
+                        </div>
+                        {/* Grid */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
+                            {industries.map((item, index) => (
+                                <div
+                                    key={index}
+                                    className="relative group h-[160px] md:h-[260px] rounded-xl border border-gray-200 shadow-lg overflow-hidden cursor-pointer bg-white"
+                                >
+                                    {/* Hover Image (behind title) */}
+                                    <img
+                                        src={item.image}
+                                        alt={item.title}
+                                        className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                                    />
+                                    {/* Dark overlay ONLY on hover */}
+                                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition duration-500" />
+                                    {/* Title + Icon (ALWAYS visible) */}
+                                    <div className="relative z-10 h-full flex flex-col items-center justify-center text-[#091b32] group-hover:text-white transition duration-500 hover:scale-110 transition-transform
+">
+                                        <div className="mb-3">
+                                            {item.icon}
+                                        </div>
+                                        <h3 className="text-lg md:text-2xl font-semibold tracking-wide text-center">
+                                            {item.title}
+                                        </h3>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                        {/* Second row centering */}
+                        <style>
+                            {`
+                                @media (min-width: 1024px) {
+                                .grid > div:nth-child(4) {
+                                    grid-column: 1;
+                                }
+                                .grid > div:nth-child(5) {
+                                    grid-column: 2;
+                                }
+                                }
+                            `}
+                        </style>
 
-                    <div
-                        className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5
-            gap-6 md:gap-10 max-w-6xl mx-auto"
-                    >
-                        {[
-                            "jyoti-logo.svg",
-                            "Logo-Hydrobenz.png",
-                            "Silver-Logo.png",
-                            "Fine-Logo.png",
-                            "Bhavani-Logo.png",
-                        ].map((logo, i) => (
-                            <div
-                                key={i}
-                                data-aos="fade-up"
-                                data-aos-delay={i * 80}
-                                className="bg-white p-4 rounded-xl shadow-md hover:shadow-2xl
-                           transition overflow-hidden group border border-gray-200"
-                            >
-                                <img
-                                    src={logo}
-                                    className="w-full h-30 object-contain group-hover:grayscale-0 
-                             transition-transform duration-500 group-hover:scale-105"
-                                    alt="Client Logo"
-                                />
-                            </div>
-                        ))}
                     </div>
                 </section>
-
-
                 {/* SECTION 3 — PARTNERSHIP MESSAGE */}
-                <section className="py-20" data-aos="fade-up">
-                    <h3 className="text-center text-xl md:text-[35px] font-bold mb-10 text-[#0c2546]">
+                <section className="py-7 md:py-10" data-aos="fade-up">
+                    <h3 className="text-center text-lg md:text-[35px] font-bold mb-5 text-[#0c2546]">
                         Built on Trust, Quality & Long-Term Collaboration
                     </h3>
-                    <div className="max-w-5xl mx-auto bg-[#0c2546] text-white p-8 md:p-10 rounded-3xl shadow-xl">
+                    <div className="max-w-8xl mx-auto bg-[#0c2546] text-white p-8 md:p-10 rounded-3xl shadow-xl">
+                        <div className="flex"><p className="text-xl md:text-3xl">•</p>
+                            <p className="ml-3 md:mt-1 text-lg md:text-xl leading-relaxed">
+                                We believe that strong partnerships are built on transparency, consistent
+                                quality, and mutual growth. Each collaboration reflects our commitment to
+                                engineering excellence and our ability to deliver tailored solutions across
+                                diverse manufacturing requirements.
+                            </p>
+                        </div><br/>
+                        <div className="flex"><p className="text-xl md:text-3xl">•</p>
+                            <p className="ml-3 md:mt-1 text-lg md:text-xl leading-relaxed">
+                                With every project, we strive not only to meet client expectations but to
+                                exceed them through innovation, precision, and dependable service.
+                            </p>
+                        </div>
 
-
-                        <p className="text-base md:text-xl leading-relaxed">
-                            We believe that strong partnerships are built on transparency, consistent
-                            quality, and mutual growth. Each collaboration reflects our commitment to
-                            engineering excellence and our ability to deliver tailored solutions across
-                            diverse manufacturing requirements.
-                        </p>
-
-                        <p className="mt-6 text-base md:text-xl leading-relaxed">
-                            With every project, we strive not only to meet client expectations but to
-                            exceed them through innovation, precision, and dependable service. Our
-                            partners value our dedication to continuous improvement and our ability
-                            to adapt to evolving industry standards.
-                        </p>
-
-                    </div>
+                        </div>
                 </section>
-
-
                 {/* SECTION 4 — OPTIONAL TESTIMONIALS */}
-                <section className="py-10" data-aos="fade-up">
+                <section className="rounded-2xl shadow-xl py-4 bg-white mb-6 md:mb-8" data-aos="fade-up">
 
-                    <h2 className="text-center text-2xl md:text-[40px] font-bold text-[#0c2546] mb-10">
+                    <h2 className="text-center text-xl md:text-[40px] font-bold text-[#0c2546] mb-2">
                         What Our Clients Say
                     </h2>
 
                     {/* SLIDER OUTER WRAPPER */}
-                    <div className="relative h-full bg-[#f5f3ee] overflow-hidden max-w-6xl mx-auto py-4 px-4">
+                    <div className="relative h-full bg-white overflow-hidden max-w-6xl mx-auto py-4 px-4">
 
                         {/* LEFT Fade Mask */}
                         <div className="pointer-events-none absolute top-0 left-0 h-full w-10 
-                    bg-gradient-to-r from-[#f5f3ee] to-transparent z-20"></div>
+                    bg-gradient-to-r from-white to-transparent z-20"></div>
 
                         {/* RIGHT Fade Mask */}
                         <div className="pointer-events-none absolute top-0 right-0 h-full w-10 
-                    bg-gradient-to-l from-[#f5f3ee] to-transparent z-20"></div>
+                    bg-gradient-to-l from-white to-transparent z-20"></div>
 
                         {/* SLIDER TRACK */}
-                        <div className="flex animate-slide gap-6">
+                        <div className="flex animate-slide gap-3 md:gap-6">
 
                             {[
                                 {
@@ -184,12 +227,12 @@ export default function Clients() {
                                     <div
                                         key={i}
                                         className="
-                                         w-94 min-w-[260px] sm:min-w-[320px] 
-                                        rounded-2xl p-6 flex-shrink-0
+                                         w-40 md:w-94 min-w-[260px] sm:min-w-[320px] 
+                                        rounded-2xl p-4 md:p-6 flex-shrink-0
                                         backdrop-blur-xl bg-[#0c2546]/95
                                     border-white/10 shadow-lg relative
                                         transition-all duration-300 ease-out
-                                        hover:-translate-y-3 hover:shadow-2xl hover:shadow-blue-500/30"
+                                        hover:-translate-y-3"
                                     >
                                         {/* Left Accent Line */}
                                         <div className="
@@ -198,26 +241,19 @@ export default function Clients() {
     group-hover: group-hover:shadow-[0_0_12px_2px_rgba(59,130,246,0.6)]
   "></div>
 
-                                        <p className="text-white font-semibold text-base md:text-lg leading-relaxed">
+                                        <p className="text-white font-semibold text-sm md:text-lg leading-relaxed">
                                             “{item.text}”
                                         </p>
 
-                                        <p className="mt-4 text-white font-bold text-sm md:text-base opacity-90">
+                                        <p className="mt-4 text-white font-bold text-sm md:text-lg opacity-90">
                                             — {item.name}
                                         </p>
                                     </div>
-
-
                                 ))}
-
                         </div>
                     </div>
 
                 </section>
-
-
-
-
             </div>
         </div>
     );

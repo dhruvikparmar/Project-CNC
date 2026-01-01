@@ -70,10 +70,10 @@ export default function ContactForm() {
 
       {/* ===== HERO SECTION ===== */}
       <div
+      id="hero"
         data-aos="fade-zoom-in"
-        className="relative w-full 
-        min-h-[40vh] sm:min-h-[50vh] md:min-h-[60vh] lg:h-[400px]
-        flex items-center justify-center overflow-hidden"
+        className="min-h-[40vh] sm:min-h-[50vh] md:min-h-[60vh] bg-cover bg-center flex items-center justify-center relative"
+        
       >
         <img
           src="/contact2.jpg"
@@ -96,14 +96,14 @@ export default function ContactForm() {
       </div>
 
       {/* ===== CONTENT SECTION ===== */}
-      <div className="px-4 py-12 sm:py-16">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10">
+      <div className="px-4 py-4 md:py-6 sm:py-16">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-2 md:gap-10">
 
           {/* LEFT INFO PANEL */}
           <div
             data-aos="fade-right"
             className="bg-[#0c2546] border border-[#1e3358]
-            rounded-xl p-6 sm:p-8 shadow-xl h-fit"
+            rounded-xl p-6 sm:p-8 shadow-xl h-110"
           >
             <h2 className="text-2xl font-bold text-[#dbeafe] mb-4">
               Get In Touch
@@ -166,7 +166,7 @@ export default function ContactForm() {
             <button
               type="submit"
               className="w-full bg-sky-400 text-[#091b32]
-              py-2.5 rounded-md font-semibold
+              py-2.5 rounded-md cursor-pointer font-semibold
               hover:bg-sky-300 transition"
             >
               Send Message
