@@ -540,7 +540,7 @@ export default function Home() {
               },
               {
                 title: "Hydrolic Parts",
-                images: ["Product2.jpg", "Product2-2.jpg", "Product2-1.jpg"],
+                images: ["infra7.jpg", "Product2-2.jpg", "Product2-1.jpg"],
                 desc: "Ensuring consistent pressure handling and superior hydraulic efficiency."
 
               },

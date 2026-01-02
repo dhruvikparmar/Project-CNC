@@ -5,7 +5,7 @@ import { useEffect } from "react";
 
 const galleryImages = [
   "product4.JPG", "infra11.jpg", "Product4-1.JPG",
-  "Product2.jpg", "Product2-1.jpg", "Product2-2.jpg",
+  "infra7.jpg", "Product2-1.jpg", "Product2-2.jpg",
   "product1.JPG", "Product1-1.png", "infra16.JPG",
   "infra14.JPG", "infra1.jpg", "Product4-2.png",
   "Product5-3.png", "infra12.jpg", "Product5-1.png", "infra24.JPG",
