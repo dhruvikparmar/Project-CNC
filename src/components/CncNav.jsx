@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function CncNav() {
   const [scrolled, setScrolled] = useState(false);
@@ -14,31 +14,9 @@ export default function CncNav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const go = (path) => {
-    navigate(path);
-    window.scrollTo({ top: 0, behavior: "auto" });
-  };
-
-  const NavItem = ({ label, to, go, activePath }) => {
-    const isActive = activePath === to;
-
-    return (
-      <button
-        onClick={() => go(to)}
-        className={`
-        cursor-pointer
-        relative text-xs md:text-sm lg:text-lg font-medium
-        transition-all duration-300
-        ${isActive ? "text-sky-300" : "text-white hover:text-sky-300"}
-        after:absolute after:left-0 after:-bottom-1
-        after:h-[2px] after:bg-sky-300
-        after:transition-all after:duration-300
-        ${isActive ? "" : "after:w-0 hover:after:w-full"}
-      `}
-      >
-        {label}
-      </button>
-    );
+  const navigateAndScrollTop = (to) => {
+    navigate(to);
+    window.scrollTo({ top: 0, behavior: "instant" });
   };
 
   return (
@@ -58,31 +36,31 @@ export default function CncNav() {
               className="flex items-center cursor-pointer shrink-0"
             >
               <img
-                src="/Logo3.png"
-                alt="Shree Industries"
-                className="h-9 sm:h-16 md:h-13 lg:h-12 w-auto max-w-[120px] object-contain"
+                src="/logo5.png"
+                alt="Zenith CNC"
+                className="
+                  h-24 sm:h-28 md:h-30 lg:h-36 lg:mt-2
+                  w-auto max-w-[220px]
+                  object-contain cursor-pointer
+                  transition-transform duration-300
+                  hover:scale-105
+                "
               />
             </div>
-            {/* -------- DESKTOP MENU -------- */}
-            <div className="hidden md:flex flex-1 justify-center gap-3 lg:gap-10">
-              <div className="cursor-pointer"><NavItem label="Home" to="/" go={go} activePath={location.pathname}/></div>
-              <NavItem label="About Us" to="/AboutUs" go={go} activePath={location.pathname} />
-              <NavItem label="Infrastructure" to="/Infrastructure" go={go} activePath={location.pathname}/>
-              <NavItem label="Quality" to="/Quality" go={go} activePath={location.pathname}/>
-              <NavItem label="Capability" to="/capibility" go={go} activePath={location.pathname}/>
-              <NavItem label="Industries We Serve" to="/valueablepartner" go={go} activePath={location.pathname}/>
-              <NavItem label="Gallery" to="/Gallery" go={go} activePath={location.pathname}/>
+
+            {/* DESKTOP MENU */}
+            <div className="hidden md:flex flex-1 justify-center md:space-x-4 lg:space-x-8">
+              <NavItem label="Home" to="/" onClick={navigateAndScrollTop} />
+              <NavItem label="About Us" to="/AboutUs" onClick={navigateAndScrollTop} />
+              <NavItem label="Quality" to="/Quality" onClick={navigateAndScrollTop} />
+              <NavItem label="Infrastructure" to="/Infrastructure" onClick={navigateAndScrollTop} />
+              <NavItem label="Capability" to="/capibility" onClick={navigateAndScrollTop} />
+              <NavItem label="Valuable Partner" to="/valueablepartner" onClick={navigateAndScrollTop} />
             </div>
 
             {/* -------- DESKTOP CONTACT -------- */}
             <div className="hidden md:block shrink-0">
-              <button
-                onClick={() => go("/contact")}
-                className="px-3 py-1.5 cursor-pointer text-xs md:text-sm font-semibold text-white bg-[#3a92d1]
-                           rounded-md hover:bg-sky-700 transition"
-              >
-                Contact
-              </button>
+              <ContactButton onClick={() => navigateAndScrollTop("/contact")} />
             </div>
 
             {/* -------- MOBILE MENU -------- */}
@@ -104,13 +82,10 @@ const NavItem = ({ label, to, go }) => (
   <button
     onClick={() => go(to)}
     className="
-      relative text-white text-xs md:text-sm lg:text-lg font-medium
-      transition-colors duration-300
-      hover:text-sky-300
-      after:absolute after:left-0 after:-bottom-1
-      after:h-[2px] after:w-0 after:bg-sky-300
-      after:transition-all after:duration-300
-      hover:after:w-full
+      relative cursor-pointer text-blue-50 font-medium
+      text-xs md:text-sm lg:text-base transition-colors duration-300 hover:text-white
+      after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-sky-300
+      after:transition-all after:duration-300 hover:after:w-full
     "
   >
     {label}
@@ -123,37 +98,31 @@ const MobileMenu = ({ go }) => {
 
   return (
     <>
-      {/* Hamburger Icon */}
-      <button
-        onClick={() => setOpen(!open)}
-        className="md:hidden ml-auto text-white text-2xl">
-        {open ? "✕" : "☰"}
-      </button>
+      <div className="md:hidden ml-auto shrink-0">
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="text-blue-50 text-2xl leading-none cursor-pointer"
+        >
+          {isOpen ? "✕" : "☰"}
+        </button>
+      </div>
 
-      {/* Mobile Dropdown */}
       <div
-        className={`lg:hidden absolute left-0 right-0 top-16 bg-[#091b32]
-        transition-all duration-200
-        ${open ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-3 pointer-events-none"}`}
+        className={`md:hidden absolute left-0 right-0 top-16
+          bg-[#091b32]/90 backdrop-blur-lg transition-all duration-300
+          ${isOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"}
+        `}
       >
-        <div className="flex flex-col px-6 py-4 gap-4 text-center">
-          <MobileItem label="Home" to="/" go={go} close={() => setOpen(false)} />
-          <MobileItem label="About Us" to="/AboutUs" go={go} close={() => setOpen(false)} />
-          <MobileItem label="Infrastructure" to="/Infrastructure" go={go} close={() => setOpen(false)} />
-          <MobileItem label="Quality" to="/Quality" go={go} close={() => setOpen(false)} />
-          <MobileItem label="Capability" to="/capibility" go={go} close={() => setOpen(false)} />
-          <MobileItem label="Industries We Serve" to="/valueablepartner" go={go} close={() => setOpen(false)} />
-          <MobileItem label="Gallery" to="/Gallery" go={go} close={() => setOpen(false)} />
-
-          <button
-            onClick={() => {
-              setOpen(false);
-              go("/contact");
-            }}
-            className="w-full bg-sky-400 text-white py-2 rounded-md hover:bg-sky-700 transition"
-          >
-            Contact
-          </button>
+        <div className="px-6 py-4 space-y-4 text-center">
+          <MobileNavItem label="Home" to="/" close={navigateAndClose} />
+          <MobileNavItem label="About Us" to="/AboutUs" close={navigateAndClose} />
+          <MobileNavItem label="Quality" to="/Quality" close={navigateAndClose} />
+          <MobileNavItem label="Infrastructure" to="/Infrastructure" close={navigateAndClose} />
+          <MobileNavItem label="Capability" to="/capibility" close={navigateAndClose} />
+          <MobileNavItem label="Valuable Partner" to="/valueablepartner" close={navigateAndClose} />
+          <div className="pt-4">
+            <ContactButton full onClick={() => navigateAndClose("/contact")} />
+          </div>
         </div>
       </div>
     </>

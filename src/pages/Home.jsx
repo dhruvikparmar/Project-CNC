@@ -169,7 +169,7 @@ export default function Home() {
             data-aos="fade-up"
           >
             <h1
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl
+              className="text-2xl sm:text-3xl max-sm:text-3xl md:text-4xl lg:text-5xl
                          font-bold text-white
                          transition-all duration-700
                          hover:scale-105"

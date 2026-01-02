@@ -31,8 +31,7 @@ function App() {
           <Route path='/valueablePartner' element={<Cliens />} />
           <Route path='/contact' element={<ContactForm />} />
           <Route path='Gallery' element={<Gallery />} />
-        </Routes>
-        <CncFoot />
+      </Routes>
       </BrowserRouter>
       <ScrollToHero />
       <WhatsAppFloat />
