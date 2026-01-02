@@ -65,13 +65,13 @@ export default function CncNav() {
             </div>
             {/* -------- DESKTOP MENU -------- */}
             <div className="hidden md:flex flex-1 justify-center gap-3 lg:gap-10">
-              <div className="cursor-pointer"><NavItem label="Home" to="/" go={go} activePath={location.pathname}/></div>
+              <div className="cursor-pointer"><NavItem label="Home" to="/" go={go} activePath={location.pathname} /></div>
               <NavItem label="About Us" to="/AboutUs" go={go} activePath={location.pathname} />
-              <NavItem label="Infrastructure" to="/Infrastructure" go={go} activePath={location.pathname}/>
-              <NavItem label="Quality" to="/Quality" go={go} activePath={location.pathname}/>
-              <NavItem label="Capability" to="/capibility" go={go} activePath={location.pathname}/>
-              <NavItem label="Industries We Serve" to="/valueablepartner" go={go} activePath={location.pathname}/>
-              <NavItem label="Gallery" to="/Gallery" go={go} activePath={location.pathname}/>
+              <NavItem label="Infrastructure" to="/Infrastructure" go={go} activePath={location.pathname} />
+              <NavItem label="Quality" to="/Quality" go={go} activePath={location.pathname} />
+              <NavItem label="Capability" to="/capibility" go={go} activePath={location.pathname} />
+              <NavItem label="Industries We Serve" to="/valueablepartner" go={go} activePath={location.pathname} />
+              <NavItem label="Gallery" to="/Gallery" go={go} activePath={location.pathname} />
             </div>
 
             {/* -------- DESKTOP CONTACT -------- */}

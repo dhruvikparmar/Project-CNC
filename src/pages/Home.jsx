@@ -107,7 +107,7 @@ export default function Home() {
     );
   }
   return (
-    <>
+    <div className="overflow-x-hidden">
       {/* ================= SLIDER ================= */}
       <section id="hero" className="bg-[#f5f3ee] py-0 sm:py-0 lg:py-0">
         <div
@@ -169,7 +169,7 @@ export default function Home() {
             data-aos="fade-up"
           >
             <h1
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl
+              className="text-2xl sm:text-3xl max-sm:text-xl md:text-4xl lg:text-5xl
                          font-bold text-white
                          transition-all duration-700
                          hover:scale-105"
@@ -189,7 +189,7 @@ export default function Home() {
         >
 
           {/* TEXT CONTENT */}
-          <div className="md:w-[110vh]" data-aos="fade-right">
+          <div className="w-full max-w-full" data-aos="fade-right">
             {/* <h2 className="text-sm font-semibold tracking-wider text-[#091b32] mb-2">
               ABOUT US
             </h2> */}
@@ -360,7 +360,7 @@ export default function Home() {
               <img
                 src="Work2.jpg"
                 alt="Engineering Work"
-                className="relative z-0 w-[140vh] h-full object-cover
+                className="relative z-0 w-full h-full object-cover
     transition-transform duration-700 ease-out
     hover:scale-110"
               />
@@ -369,10 +369,7 @@ export default function Home() {
           </div>
 
           {/* TEXT CONTENT */}
-          <div
-            data-aos="fade-left"
-            className="md:w-[110vh] order-1 md:order-2"
-          >
+          <div data-aos="fade-left" className="w-full max-w-full order-1 md:order-2">
             <h2 className="text-xl sm:text-3xl lg:text-4xl
         font-bold text-[#0c2546] mb-5">
               Engineering Work
@@ -399,7 +396,7 @@ export default function Home() {
         >
 
           {/* TEXT CONTENT */}
-          <div className="md:w-[105vh]" data-aos="fade-right">
+          <div className="w-full max-w-full" data-aos="fade-right">
             <h2 className="text-xl sm:text-3xl lg:text-4xl
         font-bold text-[#0c2546] mb-5">
               Precision Inspection with CMM Machine
@@ -594,7 +591,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }
 
