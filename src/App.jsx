@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect } from 'react'
 import './App.css'
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
@@ -17,6 +17,37 @@ import ScrollToHero from './components/ScrollToHero'
 import WhatsAppFloat from './components/WhatsAppFloat'
 
 function App() {
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      const key = e.key.toLowerCase();
+
+      // Disable Ctrl+U, Ctrl+S, Ctrl+Shift+I
+      if (
+        e.ctrlKey &&
+        (key === "u" || key === "s" || (key === "i" && e.shiftKey))
+      ) {
+        // Allow copy
+        if (key === "c") return;
+
+        // Allow typing in inputs
+        const tag = e.target.tagName.toLowerCase();
+        if (tag === "input" || tag === "textarea") return;
+
+        e.preventDefault();
+      }
+    };
+
+    const disableRightClick = (e) => e.preventDefault();
+
+    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("contextmenu", disableRightClick);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("contextmenu", disableRightClick);
+    };
+  }, []);
+
 
   return (
     <>

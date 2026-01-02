@@ -181,20 +181,20 @@ export default function Home() {
       </section>
 
       {/* ================= ABOUT US ================= */}
-      <section className="bg-[#f5f3ee] py-8 md:py-16 px-4">
+      <section className="bg-[#f5f3ee] py-8 px-5 md:px-0 md:py-8">
         <div
-          className="max-w-6xl mx-auto
+          className="max-w-7xl mx-auto
     grid grid-cols-1 md:grid-cols-[0.85fr_1.15fr]
-    gap-10 items-center"
+     gap-5 md:gap-0 items-center"
         >
 
           {/* TEXT CONTENT */}
-          <div data-aos="fade-right">
+          <div className="md:w-[110vh]" data-aos="fade-right">
             {/* <h2 className="text-sm font-semibold tracking-wider text-[#091b32] mb-2">
               ABOUT US
             </h2> */}
 
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl
+            <h2 className="text-xl sm:text-3xl lg:text-4xl
         font-bold text-[#0c2546] mb-5">
               About Us
             </h2>
@@ -218,22 +218,22 @@ export default function Home() {
         max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl
         h-56 sm:h-64 md:h-72 lg:h-80
         rounded-lg shadow-lg
-        overflow-visible"
+        overflow-hidden"
             >
               {/* Fixed Text */}
               <span
                 className="absolute top-4 left-4 z-10
           text-white text-sm sm:text-base lg:text-lg
-          font-semibold tracking-wide
+          font-semibold tracking-wide 
           drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]"
               >
                 Structured & Quality-Driven Process
               </span>
 
               <img
-                src="work.jpg"
+                src="About.png"
                 alt="How We Work"
-                className="relative z-0 w-full h-full object-cover
+                className="relative overflow-hidden z-0 w-full h-full object-cover
           transition-transform duration-700 ease-out
           hover:scale-110"
               />
@@ -244,12 +244,12 @@ export default function Home() {
       </section>
 
       {/* ================= HOW WE WORK FOR YOU ================= */}
-      <section className="bg-white py-12 sm:py-16 lg:py-20 px-4">
+      <section className="bg-white py-6 sm:py-16 lg:py-6 md:px-4">
         <div className="max-w-6xl mx-auto">
 
           {/* Heading */}
-          <div className="text-center mb-20">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl
+          <div className="text-center mb-5 md:mb-20">
+            <h2 className="text-xl sm:text-4xl lg:text-5xl
         font-bold text-[#0c2546]">
               How We Work For You
             </h2>
@@ -327,17 +327,17 @@ export default function Home() {
       </section>
 
       {/* ================= ENGINEERING WORK ================= */}
-      <section className="bg-[#f5f3ee] py-10 md:py-16 px-4">
+      <section className="bg-[#f5f3ee] py-4 md:py-8 px-4">
         <div
-          className="max-w-6xl mx-auto
+          className="max-w-7xl mx-auto
     grid grid-cols-1 md:grid-cols-[1.15fr_0.85fr]
-    gap-10 items-center"
+    gap-5 md:gap-0 items-center"
         >
 
           {/* IMAGE */}
           <div
             data-aos="fade-right"
-            className="flex justify-center md:justify-start
+            className="flex 
              order-2 md:order-1"
           >
             <div
@@ -360,7 +360,7 @@ export default function Home() {
               <img
                 src="Work2.jpg"
                 alt="Engineering Work"
-                className="relative z-0 w-full h-full object-cover
+                className="relative z-0 w-[140vh] h-full object-cover
     transition-transform duration-700 ease-out
     hover:scale-110"
               />
@@ -371,9 +371,9 @@ export default function Home() {
           {/* TEXT CONTENT */}
           <div
             data-aos="fade-left"
-            className="order-1 md:order-2"
+            className="md:w-[110vh] order-1 md:order-2"
           >
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl
+            <h2 className="text-xl sm:text-3xl lg:text-4xl
         font-bold text-[#0c2546] mb-5">
               Engineering Work
             </h2>
@@ -391,16 +391,16 @@ export default function Home() {
         </div>
       </section>
       {/* ================= QUALITY MANAGEMENT ================= */}
-      <section className="bg-[#f5f3ee] py-2 md:py-16 px-4">
+      <section className="bg-[#f5f3ee] py-2 md:py-2 px-4">
         <div
-          className="max-w-6xl mx-auto
+          className="max-w-7xl mx-auto
     grid grid-cols-1 md:grid-cols-[0.85fr_1.15fr]
-    gap-10 items-center"
+    gap-5 md:gap-10 items-center"
         >
 
           {/* TEXT CONTENT */}
-          <div data-aos="fade-right">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl
+          <div className="md:w-[105vh]" data-aos="fade-right">
+            <h2 className="text-xl sm:text-3xl lg:text-4xl
         font-bold text-[#0c2546] mb-5">
               Precision Inspection with CMM Machine
               {/* Working With Stringent Quality Management Practices */}
@@ -452,18 +452,18 @@ export default function Home() {
       </section>
 
       {/* ================= OUR CAPABILITIES ================= */}
-      <section className="bg-[#f5f3ee] py-12 sm:py-16 px-4">
+      <section className="bg-[#f5f3ee] py-6 md:py-8 sm:py-8 px-4">
         <div className="max-w-7xl mx-auto">
 
           <h2
-            className="text-center text-2xl sm:text-3xl font-bold
-                 text-[#0c2546] mb-10"
+            className="text-center text-xl sm:text-3xl font-bold
+                 text-[#0c2546] mb-5 md:mb-10"
             data-aos="fade-up"
           >
             Our Capabilities
           </h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
 
             {[
               {
@@ -522,18 +522,18 @@ export default function Home() {
       </section>
 
       {/* ================= OUR EXPERTISE ================= */}
-      <section className="bg-[#f5f3ee] py-12 sm:py-16 px-4">
+      <section className="bg-[#f5f3ee] py-4 md:py-3 sm:py-2 px-4">
         <div className="max-w-7xl mx-auto">
 
           <h2
             className="text-center text-2xl sm:text-3xl font-bold
-        text-[#0c2546] mb-10"
+        text-[#0c2546] mb-5 md:mb-10"
             data-aos="fade-up"
           >
             Our Expertise
           </h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
 
             {[
               {
