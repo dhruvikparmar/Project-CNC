@@ -32,7 +32,7 @@ export default function ContactForm() {
       from_email: email,
       from_number: number,
       message: message,
-      to_email: "dhruvikparamar1008@gmail.com",
+      to_email: "shreeindustries479@gmail.com",
       to_name: "Vivek Devaliya",
     };
 
