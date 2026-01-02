@@ -33,7 +33,7 @@ export default function ContactForm() {
       from_number: number,
       message: message,
       to_email: "dhruvikparamar1008@gmail.com",
-      to_name: "Dhruvik",
+      to_name: "Vivek Devaliya",
     };
 
     emailjs
@@ -172,7 +172,6 @@ export default function ContactForm() {
               Send Message
             </button>
           </form>
-
         </div>
       </div>
     </section>
